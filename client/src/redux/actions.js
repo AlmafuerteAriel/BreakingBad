@@ -57,9 +57,23 @@ export function getOccupations() {
 export function postCharacter(payload) {
 	return async function (dispatch) {
 		const response = await axios.post(
-			'http://localhost:3001/character',
+			'http://localhost:3001/characters',
 			payload
 		);
 		return response;
+	};
+}
+
+export function getDetails(id) {
+	return async function (dispatch) {
+		try {
+			const json = await axios.get(`http://localhost:3001/characters/${id}`);
+			return dispatch({
+				type: 'GET_DETAILS',
+				payload: json.data
+			});
+		} catch (error) {
+			console.log(error);
+		}
 	};
 }

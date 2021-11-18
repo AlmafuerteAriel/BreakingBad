@@ -71,8 +71,13 @@ router.get('/occupations', async (req, res) => {
 			where: { name: o }
 		});
 	});
-	const allOcupations = await Occupation.findAll();
-	res.send(allOcupations);
+	const allOccupations = await Occupation.findAll();
+	const allOccupationsOrdered = allOccupations.sort((a, b) => {
+		if (a.name > b.name) return 1;
+		if (a.name < b.name) return -1;
+		return 0;
+	});
+	res.send(allOccupationsOrdered);
 });
 
 router.post('/characters', async (req, res) => {

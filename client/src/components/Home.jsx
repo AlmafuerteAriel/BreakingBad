@@ -54,6 +54,7 @@ export default function Home() {
     setCurrentPage(1);
     //Modificamos el estado para actualizar renderizado
     setOrder(`Ordered ${e.target.value}`);
+    e.target.value='default';
   }
 
   return(
@@ -65,7 +66,8 @@ export default function Home() {
       <button onClick={e => {handleClick(e)}}>Reload characters</button>
       <div>
 
-        <select onChange={ (e) => handleSort(e) }>
+        <select defaultValue='default' onChange={ (e) => handleSort(e) }>
+          <option value='default' disabled='disabled'>Choose order</option>
           <option value='Ascendent'>Ascendent</option>
           <option value='Descendent'>Descendent</option>
         </select>
@@ -96,7 +98,7 @@ export default function Home() {
           currentCharacters?.map((c) => {
             return(
             <div>
-              <Link to={'/home/' + c.id}>
+              <Link to={`/home/${c.id}`}>
                 <Card 
                   name={c.name} 
                   image={c.img ? c.img : 'https://www.definicionabc.com/wp-content/uploads/silueta.gif'} 
